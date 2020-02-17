@@ -28,7 +28,8 @@ const (
 var (
 	osExit = os.Exit
 
-	log Log
+	// Chronicle chronicle log
+	Chronicle Log
 )
 
 // Log represents information about a rest server log.
