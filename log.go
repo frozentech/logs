@@ -27,6 +27,8 @@ const (
 
 var (
 	osExit = os.Exit
+
+	log Log
 )
 
 // Log represents information about a rest server log.
@@ -34,7 +36,6 @@ type Log struct {
 	entries   []Entry
 	folder    string
 	Pad       int
-	showCount bool
 	startTime int64
 }
 
@@ -66,14 +67,10 @@ func New() *Log {
 		Time:    time.Now().UTC(),
 	}
 
+	log.Pad = 30
 	log.startTime = log.TimeMs()
 
 	return &log
-}
-
-// ShowCount log
-func (l *Log) ShowCount(show bool) {
-	l.showCount = show
 }
 
 func (l *Log) addEntry(level string, v ...interface{}) {
@@ -144,10 +141,8 @@ func (l *Log) Dump(printLogs ...bool) string {
 			l.entries[i].Level,
 		}
 
-		if l.showCount {
-			params = append(params, pad.Left(strconv.Itoa(i), 3, "0"))
-			format = format + "  %s"
-		}
+		params = append(params, pad.Left(strconv.Itoa(i), 3, "0"))
+		format = format + "  %s"
 
 		params = append(params, l.entries[i].Message)
 
