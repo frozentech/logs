@@ -90,6 +90,12 @@ func (l *Log) Entries() []Entry {
 	return l.entries
 }
 
+// Record ...
+func (l *Log) Record(header string, v interface{}) error {
+	l.Print(pad.Right(header, l.Pad, " "), v)
+	return nil
+}
+
 // Print a regular log
 func (l *Log) Print(v ...interface{}) {
 	l.addEntry(LogLevelDebug, v...)
