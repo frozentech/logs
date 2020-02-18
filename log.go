@@ -29,7 +29,7 @@ var (
 	osExit = os.Exit
 
 	// Story  log
-	Story Log
+	Story *Log
 )
 
 // Log represents information about a rest server log.
